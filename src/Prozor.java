@@ -4,26 +4,14 @@ public class Prozor {
     private String oznaka;
     private String boja;
     private boolean open;
-    private double x1;
-    private double y1;
-    private double x2;
-    private double y2;
+    Koordinata A = new Koordinata(0, 0);
+    Koordinata B = new Koordinata(0, 0);
+    Koordinata C = new Koordinata(0, 0);
+    Koordinata D = new Koordinata(0, 0);
 
-    public Prozor(String naslov, String oznaka, String boja, boolean open, double x1, double y1, double x2, double y2) throws IllegalArgumentException{
-
-        if(x1<0 || x2<0 || y1<0 || y2<0){
-            throw new IllegalArgumentException("Koordinata ne smije biti negativna");
-        }
-
+    public Prozor(String naslov) {
 
         this.naslov = naslov;
-        this.oznaka = oznaka;
-        this.boja = boja;
-        this.open = open;
-        this.x1 = x1;
-        this.y1 = y1;
-        this.x2 = x2;
-        this.y2 = y2;
     }
 
     public String getNaslov() {
@@ -58,37 +46,43 @@ public class Prozor {
         this.open = open;
     }
 
-    public double getX1() {
-        return x1;
+    public int getD() {
+        return D.getX() + D.getY();
     }
 
-    public void setX1(double x1) {
-        this.x1 = x1;
+    public void setD(int x, int y) {
+        D.setX(x);
+        D.setY(y);
     }
 
-    public double getY1() {
-        return y1;
+    public int getC() {
+        return C.getX() + C.getY();
     }
 
-    public void setY1(double y1) {
-        this.y1 = y1;
+    public void setC(int x, int y) {
+        C.setX(x);
+        C.setY(y);
     }
 
-    public double getX2() {
-        return x2;
+    public int getB() {
+        return B.getX() + B.getY();
     }
 
-    public void setX2(double x2) {
-        this.x2 = x2;
+    public void setB(int x, int y) {
+        B.setX(x);
+        B.setY(y);
     }
 
-    public double getY2() {
-        return y2;
+
+    public int getA() {
+        return A.getX() + A.getY();
     }
 
-    public void setY2(double y2) {
-        this.y2 = y2;
+    public void setA(int x, int y) {
+        A.setX(x);
+        A.setY(y);
     }
+
 
     @Override
     public String toString() {
@@ -96,44 +90,46 @@ public class Prozor {
                 ", oznaka='" + oznaka +
                 ", boja='" + boja +
                 ", open=" + open +
-                ", A(" + x1 +"," +y1 +")"
-                +", B("+x2+","+y2+")";
+                ", A(" + A.getX() + "," + A.getY() + ")"
+                + ", B(" + B.getX() + "," + B.getY() + ")" +
+                ", C(" + C.getX() + "," + C.getY() + ")" +
+                ", D(" + D.getX() + "," + D.getY() + ")";
     }
 
-    public double width(){
-        double veci=x1;
-        double manji=x2;
-        if(veci<x2){
-            veci=x2;
-            manji=x1;
+    public double width() {
+        double veci = A.getX();
+        double manji = B.getX();
+        if (veci < B.getX()) {
+            veci = B.getX();
+            manji = A.getX();
         }
 
-        return veci-manji;
+        return veci - manji;
     }
 
-    public double height(){
-        double veci=y1;
-        double manji=y2;
-        if(veci<y2){
-            veci=y2;
-            manji=y1;
+    public double height() {
+        double veci = A.getY();
+        double manji = C.getY();
+        if (veci < C.getY()) {
+            veci = C.getY();
+            manji = A.getY();
         }
-        return veci-manji;
+        return veci - manji;
     }
 
-    public double area(){
-        return height()*width();
+    public double area() {
+        return height() * width();
     }
 
-    public double perimiter(){
-        return 2*(height()+width());
+    public double perimiter() {
+        return 2 * (height() + width());
     }
 
-    public void draw(){
-       int sirina=(int)Math.round(width());
-       int visina=(int)Math.round(height());
-        for(int i=0;i<sirina;i++){
-            for(int j=0;j<visina;j++){
+    public void draw() {
+        int sirina = (int) Math.round(width());
+        int visina = (int) Math.round(height());
+        for (int i = 0; i < sirina; i++) {
+            for (int j = 0; j < visina; j++) {
                 System.out.print("* ");
             }
             System.out.println();
@@ -141,8 +137,4 @@ public class Prozor {
 
 
     }
-
-
-
-
 }
