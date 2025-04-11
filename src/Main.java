@@ -16,7 +16,6 @@ try {
     System.out.println(e.getMessage());
 
 }
-
         window1.setBoja("bijela");
         window1.setOznaka("p1");
         window1.setOpen(false);
